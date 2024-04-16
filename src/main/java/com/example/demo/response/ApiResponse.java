@@ -20,6 +20,10 @@ public class ApiResponse<T> {
         this.results = List.of(result);
     }
 
+    public ApiResponse(Code code) {
+        this.status = new Status(code);
+    }
+
     public Status getStatus() {
         return status;
     }

@@ -17,4 +17,9 @@ public class Status {
     public Code getCode() {
         return code;
     }
+
+    public String getMessage() {
+        return message;
+    }
+
 }
