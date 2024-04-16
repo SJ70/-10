@@ -62,21 +62,83 @@ http status 가 아닌 서버에서 정의하는 code 값이 담겨져 있어야
 
 1. 이름과 성적을 입력받아 저장하는 api
 
-   a. 성적의 입력은 특정 값(위 에러 응답일 경우에서는 6) 이 넘었을 경우에는 에러 응답이 나타나야 합니다.
-
+    a. 성적의 입력은 특정 값(위 에러 응답일 경우에서는 6) 이 넘었을 경우에는 에러 응답이 나타나야 합니다.
+```json
+{
+  "status": {
+    "code": 2000,
+    "message": "OK"
+  },
+  "metadata": {
+    "resultCount": 1
+  },
+  "results": [
+    {
+      "name": "kim",
+      "grade": "1"
+    }
+  ] 
+}
+```
 
 2. 입력된 성적을 조회 하는 api
 
-   a. 성적 오름차순으로 조회가 되어야 합니다.
-
+    a. 성적 오름차순으로 조회가 되어야 합니다.
+```json
+{
+  "status": {
+    "code": 2000,
+    "message": "OK"
+  },
+  "metadata": {
+    "resultCount": 2
+  },
+  "results": [
+    {
+      "name": "kim",
+      "grade": "1"
+    },
+    {
+      "name": "lee",
+      "grade": "3"
+    }
+  ] 
+}
+```
 
 3. 특정 성적을 입력받아, 해당 성적의 학생만 조회하는 api
+```json
+{
+  "status": {
+    "code": 2000,
+    "message": "OK"
+  },
+  "metadata": {
+    "resultCount": 1
+  },
+  "results": [
+    {
+      "name": "kim",
+      "grade": "1"
+    }
+  ] 
+}
+```
 
 ---
 ### 구현 요구사항
 
 
 1. Controller 에서 응답 모델로 만들어 주어야 합니다.
+```java
+@ResponseBody
+public ApiResponse<Student> searchAllStudent() {
+    /*...*/
+    Student result = studentService.getAll();
+    /*...*/
+    return makeResponse(result);    
+}
+```
 
     - `ApiResponse<T>`:  
         여러가지 데이터 타입(클래스) 를 `result` 로 넣을 수 있도록 제네릭을 사용하여서 구현해야 합니다.
@@ -87,13 +149,30 @@ http status 가 아닌 서버에서 정의하는 code 값이 담겨져 있어야
 
 
 2. 에러응답을 만들기 위해서는 `@ExceptionHandler` 를 사용하여 `exception` 의 데이터를 이용해야 합니다.
-
+```java
+@ExceptionHandler(CustomException.class)
+@ResponseBody
+public ApiResponse customExceptionHandler(
+    HttpServletResponse response, CustomException e
+) {
+    /*...*/
+    response.setStatues(/* http 응답값 */);
+    /*...*/
+    return new ApiResopnse(code, message, data);
+}
+```
 
 3. `exceptionHandler` 에서 응답모델을 만들때 필요한 데이터가 포함시킬 수 있는 `customException` 을 구현 해야 합니다.
 
    - ex. `CustomException(ErrorCode, massge, data)` - `ErrorCode` 는 `enum` 으로 정의 합니다.
-
-     - `ErrorCode` 는 `enum` 으로 정의 합니다.
+```java
+    throw new CustomException(
+        ErrorCode.SERVER_ERROR, 
+        "grade는 6 이상을 입력할 수 없습니다.", 
+        new InputRestriction(maxGrade)
+    );
+```
+   - - `ErrorCode` 는 `enum` 으로 정의 합니다.
 
 ---
 ### 수행기간
