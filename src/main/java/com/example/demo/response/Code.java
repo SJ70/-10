@@ -1,12 +1,11 @@
 package com.example.demo.response;
 
-import com.example.demo.Config;
 import org.springframework.http.HttpStatus;
 
 public enum Code {
 
     OK(2000, HttpStatus.OK, "OK"),
-    GRADE_OVER(500, HttpStatus.BAD_REQUEST, String.format("grade는 %d 이상을 입력할 수 없습니다.", Config.GRADE_MAX_VALUE + 1));
+    BAD_REQUEST(500, HttpStatus.BAD_REQUEST, "BAD_REQUEST");
 
     private final int code;
     private final HttpStatus httpStatus;

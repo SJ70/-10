@@ -6,6 +6,9 @@ public class Student {
     private int grade;
 
     public Student(String name, int grade) {
+        if (grade > 5) {
+            throw new IllegalArgumentException("grade는 6 이상을 입력할 수 없습니다.");
+        }
         this.name = name;
         this.grade = grade;
     }

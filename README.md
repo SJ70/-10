@@ -30,7 +30,7 @@
 {
   "status": {
     "code": 500,
-    "message": "grade는 6 이상을 입력 할 수 없습니다."
+    "message": "grade는 6 이상을 입력할 수 없습니다."
   },
   "data": {
     "inputRestriction": {

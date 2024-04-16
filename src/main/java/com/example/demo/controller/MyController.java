@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.Student;
+import com.example.demo.exception.CustomException;
 import com.example.demo.response.ApiResponse;
 
 import com.example.demo.response.Code;
@@ -26,8 +27,13 @@ public class MyController extends BaseController {
             @PathVariable("name") String name,
             @PathVariable("grade") int grade
     ) {
-        Student student = studentService.addStudent(name, grade);
-        return new ApiResponse<Student>(student);
+        try {
+            Student student = studentService.addStudent(name, grade);
+            return new ApiResponse<Student>(student);
+        }
+        catch (IllegalArgumentException e) {
+            throw new CustomException(Code.BAD_REQUEST, e.getMessage());
+        }
     }
 
     @GetMapping("/student")
