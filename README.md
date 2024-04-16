@@ -188,4 +188,18 @@ public ApiResponse customExceptionHandler(
 ### 하위과제
 
 ● 에러 응답에서 다음의 경우에서도 정상적으로 data 가 응답의 결과로 나올 수 있도록 합니다.  
+```java
+public void method() {
+    try {
+        inner();
+    }
+    catch (Exception e) {
+        throw new CustomException(ErrorCode.SERVER_ERROR, "grade는 6 이상을 입력할 수 없습니다.", null);
+    }
+}
+
+public void inner() {
+    throw new CustomException(ErrorCode.SERVER_ERROR, "grade는 6 이상을 입력할 수 없습니다.", new InputRestriction(maxGrade));
+}
+```
 ● 구현한 api 이외에 필요하다고 생각하는 api를 추가 구현 하고, 위 api 요구사항에서 문제점이 발견될 경우 개선해보도록 합시다.
