@@ -30,6 +30,10 @@ public class ApiResponse<T> {
         this.status = new Status(code);
     }
 
+    public ApiResponse(Code code, String message) {
+        this.status = new Status(code, message);
+    }
+
     public Status getStatus() {
         return status;
     }

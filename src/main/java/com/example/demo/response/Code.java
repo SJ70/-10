@@ -21,4 +21,12 @@ public enum Code {
         return httpStatus;
     }
 
+    public int getCode() {
+        return code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
 }

@@ -32,7 +32,7 @@ public class MyController extends BaseController {
             return new ApiResponse<Student>(student);
         }
         catch (IllegalArgumentException e) {
-            throw new CustomException(Code.BAD_REQUEST, e.getMessage());
+            return new ApiResponse<>(Code.BAD_REQUEST, e.getMessage());
         }
     }
 

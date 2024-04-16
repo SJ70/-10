@@ -6,7 +6,7 @@ public class Status {
 
     public Status(Code code) {
         this.code = code;
-        this.message = code.name();
+        this.message = code.getMessage();
     }
 
     public Status(Code code, String message) {
@@ -14,8 +14,8 @@ public class Status {
         this.message = message;
     }
 
-    public Code getCode() {
-        return code;
+    public int getCode() {
+        return code.getCode();
     }
 
     public String getMessage() {
