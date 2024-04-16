@@ -21,4 +21,8 @@ public class StudentService {
         return studentRepository.addStudent(student);
     }
 
+    public List<Student> getStudents() {
+        return studentRepository.getStudents();
+    }
+
 }

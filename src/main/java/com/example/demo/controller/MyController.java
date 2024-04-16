@@ -30,4 +30,9 @@ public class MyController extends BaseController {
         return new ApiResponse<Student>(student);
     }
 
+    @GetMapping("/student")
+    public ApiResponse<Student> getStudents() {
+        return new ApiResponse<Student>(studentService.getStudents());
+    }
+
 }
