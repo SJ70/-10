@@ -1,11 +1,17 @@
 package com.example.demo.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.util.List;
 
 public class ApiResponse<T> {
 
     private Status status;
+
+    @JsonInclude(Include.NON_EMPTY)
     private Metadata metadata;
+
+    @JsonInclude(Include.NON_NULL)
     private List<T> results;
 
     public ApiResponse(List<T> results) {
