@@ -11,21 +11,20 @@ import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class MyController extends BaseController {
+public class StudentController extends BaseController {
 
     @Autowired
     private final StudentService studentService;
 
-    public MyController(StudentService studentService) {
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 
     @GetMapping("/student/{name}/{grade}")
-    public ApiResponse<Student> addStudent(
+    public ApiResponse<Student> add(
             @PathVariable("name") String name,
             @PathVariable("grade") int grade
     ) {
@@ -39,7 +38,7 @@ public class MyController extends BaseController {
     }
 
     @GetMapping("/student")
-    public ApiResponse<Student> getStudents() {
+    public ApiResponse<Student> getAll() {
         return new ApiResponse<Student>(studentService.getStudents());
     }
 
