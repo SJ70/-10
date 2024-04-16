@@ -25,4 +25,8 @@ public class StudentService {
         return studentRepository.getStudents().stream().sorted((a, b) -> a.getGrade() - b.getGrade()).toList();
     }
 
+    public List<Student> getStudentsByGrade(int grade) {
+        return studentRepository.getStudents().stream().filter(s -> s.getGrade() == grade).toList();
+    }
+
 }

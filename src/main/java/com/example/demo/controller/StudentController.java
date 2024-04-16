@@ -42,4 +42,11 @@ public class StudentController extends BaseController {
         return new ApiResponse<Student>(studentService.getStudents());
     }
 
+    @GetMapping("/student/{grade}")
+    public ApiResponse<Student> getByGrade(@PathVariable("grade") int grade) {
+        return new ApiResponse<Student>(studentService.getStudentsByGrade(grade));
+    }
+
+
+
 }
