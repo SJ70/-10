@@ -14,6 +14,9 @@ public class ApiResponse<T> {
     @JsonInclude(Include.NON_NULL)
     private List<T> results;
 
+    @JsonInclude(Include.NON_NULL)
+    private Object data;
+
     public ApiResponse(List<T> results) {
         this.status = new Status(Code.OK);
         this.metadata = new Metadata(results.size());
@@ -30,8 +33,9 @@ public class ApiResponse<T> {
         this.status = new Status(code);
     }
 
-    public ApiResponse(Code code, String message) {
+    public ApiResponse(Code code, String message, Object data) {
         this.status = new Status(code, message);
+        this.data = data;
     }
 
     public Status getStatus() {
@@ -44,5 +48,9 @@ public class ApiResponse<T> {
 
     public List<T> getResults() {
         return results;
+    }
+
+    public Object getData() {
+        return data;
     }
 }

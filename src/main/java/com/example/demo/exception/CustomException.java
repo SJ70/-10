@@ -6,15 +6,17 @@ public class CustomException extends RuntimeException {
 
     private Code code;
     private String message;
+    private Object data;
 
     public CustomException(Code code) {
         this.code = code;
         this.message = code.getMessage();
     }
 
-    public CustomException(Code code, String message) {
+    public CustomException(Code code, String message, Object data) {
         this.code = code;
         this.message = message;
+        this.data = data;
     }
 
     public Code getCode() {
@@ -26,5 +28,7 @@ public class CustomException extends RuntimeException {
         return message;
     }
 
-
+    public Object getData() {
+        return data;
+    }
 }
