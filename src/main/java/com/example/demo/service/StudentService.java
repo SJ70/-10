@@ -22,7 +22,7 @@ public class StudentService {
     }
 
     public List<Student> getStudents() {
-        return studentRepository.getStudents();
+        return studentRepository.getStudents().stream().sorted((a, b) -> a.getGrade() - b.getGrade()).toList();
     }
 
 }
